@@ -48,7 +48,10 @@ class GeocodeParser(Parser):
 
     def parse_city(self):
         """Method should returns city long name of current location."""
-        return self.search_address_components('locality')
+        city = self.search_address_components('locality')
+        if not city:
+            city = self.search_address_components('sublocality_level_1')
+        return city
 
     def parse_country(self):
         """Method should returns country long name from current location."""
